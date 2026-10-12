@@ -1,0 +1,118 @@
+% CEE MSc: 17 Mar 2026 guide + official 23 Jan 2026 Word front matter.
+% Use with report, 12pt, a4paper, oneside; XeLaTeX or LuaLaTeX + Biber.
+% This is an unofficial starting template, not an NTU-issued class.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cee-format}[2026/10/11 CEE MSc dissertation format]
+\RequirePackage{iftex}
+\ifPDFTeX
+  \PackageError{cee-format}{Use XeLaTeX or LuaLaTeX}{Times New Roman requires a Unicode engine.}
+\fi
+\RequirePackage{fontspec}
+% Prefer installed Times New Roman, then user-supplied licensed font files.
+\IfFontExistsTF{Times New Roman}{
+  \setmainfont{Times New Roman}
+}{
+  \IfFileExists{fonts/times.ttf}{
+    \setmainfont{times.ttf}[Path=fonts/,
+      BoldFont=timesbd.ttf,ItalicFont=timesi.ttf,BoldItalicFont=timesbi.ttf]
+  }{
+    \PackageError{cee-format}{Times New Roman is missing}{Install Times New Roman or supply the four font files in fonts/. No substitute is selected.}
+  }
+}
+\RequirePackage{geometry}
+% The official Word template confirms all four margins as 2.54 cm.
+\geometry{a4paper,left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
+\RequirePackage{setspace}
+\AtBeginDocument{\onehalfspacing}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{booktabs}
+\RequirePackage[english]{babel}
+\RequirePackage{csquotes}
+% CEE requires APA but does not specify the edition: APA 7 is our default.
+\RequirePackage[backend=biber,style=apa]{biblatex}
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}\fancyfoot[R]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+% Heading sizes, paragraph indentation and page-number position are defaults.
+\RequirePackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\Large\bfseries}
+  {\chaptername\ \thechapter}{0.5\baselineskip}{}
+\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt}
+\setcounter{tocdepth}{2}
+\RequirePackage[hidelinks]{hyperref}
+
+\newcommand{\CEETitle}{DISSERTATION TITLE}
+\newcommand{\CEEAuthor}{STUDENT NAME}
+\newcommand{\CEEProgramme}{NAME OF PROGRAMME}
+\newcommand{\CEEYear}{2026}
+\newcommand{\CEELogo}{ntu-logo.png}
+
+\newcommand{\makeCEEcover}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+    \begin{singlespace}
+      % CEE cover example labels the logo approximately 10 cm x 4 cm.
+      % Preserve its aspect ratio; do not stretch an official logo.
+      \IfFileExists{\CEELogo}{
+        \includegraphics[width=10cm,height=4cm,keepaspectratio]{\CEELogo}
+      }{
+        \fbox{\parbox[c][3.7cm][c]{9.7cm}{\centering
+          NTU LOGO PLACEHOLDER\\ADD THE OFFICIAL LOGO BEFORE SUBMISSION}}
+        \PackageWarningNoLine{cee-format}{NTU logo missing; replace the cover placeholder}
+      }
+      \vspace{2cm}
+
+      {\fontsize{24}{28}\selectfont\bfseries\MakeUppercase{\CEETitle}\par}
+      \vspace{1.5cm}
+      {\fontsize{18}{21}\selectfont\bfseries\MakeUppercase{\CEEAuthor}\par}
+      \vfill
+      {\fontsize{15}{22.5}\selectfont\bfseries SCHOOL OF CIVIL \& ENVIRONMENTAL ENGINEERING\par}
+      \vspace{1.2cm}
+      A DISSERTATION SUBMITTED IN PARTIAL FULFILMENT\par
+      OF THE REQUIREMENTS FOR THE DEGREE OF\par
+      MASTER OF SCIENCE IN \MakeUppercase{\CEEProgramme}\par
+      \vspace{1cm}
+      {\bfseries\CEEYear\par}
+    \end{singlespace}
+  \end{titlepage}
+}
+
+\newcommand{\CEEfrontmatter}{\clearpage\pagenumbering{roman}\pagestyle{fancy}}
+\newcommand{\CEEmainmatter}{\clearpage\pagenumbering{arabic}\pagestyle{fancy}}
+\newcommand{\CEEfrontchapter}[1]{%
+  \chapter*{#1}\phantomsection\addcontentsline{toc}{chapter}{#1}}
+% Official declaration headings: 14 pt, bold and centred.
+\newenvironment{CEEdeclaration}[1]{%
+  \clearpage\phantomsection\addcontentsline{toc}{chapter}{#1}%
+  \begingroup\setlength{\parindent}{0pt}\setlength{\parskip}{8pt}%
+  \begin{center}{\fontsize{14}{21}\selectfont\bfseries #1}\end{center}%
+}{\par\endgroup}
+% Blank fields only: the candidate/supervisor must complete and sign them.
+\newcommand{\CEEsignature}[1]{%
+  \par\vspace{1.2cm}\noindent
+  \begin{minipage}[t]{0.28\textwidth}
+    \rule{\linewidth}{0.4pt}\\Date
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.60\textwidth}
+    \rule{\linewidth}{0.4pt}\\{#1}
+  \end{minipage}\par
+}
+\newcommand{\CEElistoffigures}{%
+  \clearpage\phantomsection\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures}
+\newcommand{\CEElistoftables}{%
+  \clearpage\phantomsection\addcontentsline{toc}{chapter}{\listtablename}\listoftables}
+\endinput

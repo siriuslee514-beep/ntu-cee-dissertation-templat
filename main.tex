@@ -1,0 +1,128 @@
+% Compile: XeLaTeX -> Biber -> XeLaTeX -> XeLaTeX.
+% See README.md before adapting an existing EEE project.
+\documentclass[12pt,a4paper,oneside]{report}
+\usepackage{cee-format}
+\addbibresource{references.bib}
+
+% EDIT THESE FIVE FIELDS. Programme = e.g. Civil Engineering,
+% International Construction Management, Maritime Studies, or
+% Sustainability and Environmental Engineering; use your registered name.
+\renewcommand{\CEETitle}{Your Dissertation Title}
+\renewcommand{\CEEAuthor}{LI SIRUI}
+\renewcommand{\CEEProgramme}{Name of Programme}
+\renewcommand{\CEEYear}{2026}
+% Included NTU logo extracted unchanged from the official 23 Jan 2026 Word template.
+\renewcommand{\CEELogo}{ntu-logo.png}
+
+\begin{document}
+\makeCEEcover 
+\CEEfrontmatter
+
+% Official wording transcribed from Dissertation Template_23 Jan 26.docx.
+% REQUIRED BEFORE SUBMISSION: truthfully choose/delete the AI-use and
+% authorship options, fill all bracketed fields, obtain signatures and dates.
+% No option has been chosen on your behalf. Examples of other researchers'
+% publications in the Word form are NOT your publications and are not copied.
+\begin{CEEdeclaration}{Statement of Originality}
+I hereby certify that the work embodied in this thesis is the result of original research, is free of plagiarised materials, and has not been submitted for a higher degree to any other University or Institution.
+
+\textbf{Disclosure on AI Use:}
+
+[*Delete as appropriate. You may select Option A, or Option B and/or Option C.]
+
+*(A) I hereby declare that GenAI (or any AI-assisted tool) was not used in the preparation of this thesis.
+
+*(B) I hereby declare that [Name of Tool], version [XX], was used to improve the clarity and readability of this thesis, [and also for idea exploration and generation, and literature reviews and classification, etc. …]. I also declare that I have abided by NTU’s Policy on the Use of GenAI in Research, and I have reviewed and edited the content as needed after using this tool, and I take full responsibility for the content of this thesis.
+
+*(C) I hereby declare that [Name of Tool], version [XX], was used in this thesis as it is an essential component of the research design and/or methodology. Details of the usage are provided in the Methods section of this thesis. I also declare that I have abided by NTU’s Policy on the Use of GenAI in Research.
+
+\CEEsignature{[Input Name Here \& Sign above]}
+\end{CEEdeclaration}
+
+\begin{CEEdeclaration}{Supervisor Declaration Statement}
+I have reviewed the content and presentation style of this thesis and declare it is free of plagiarism and of sufficient grammatical clarity to be examined.  To the best of my knowledge, the research and writing are those of the candidate except as acknowledged in the Author Attribution Statement. I confirm that the investigations were conducted in accord with the ethics policies and integrity standards of Nanyang Technological University and that the research data are presented honestly and without prejudice.
+
+\CEEsignature{[Input Supervisor Name Here \& Sign above]}
+\end{CEEdeclaration}
+
+\begin{CEEdeclaration}{Authorship Attribution Statement}
+Please select one of the following; *delete as appropriate:
+
+*(A) This thesis does not contain any materials from papers published in peer-reviewed journals or from papers accepted at conferences in which I am listed as an author.
+
+*(B) This thesis contains material from [x number] paper(s) published in the following peer-reviewed journal(s) / from papers accepted at conferences in which I am listed as an author.
+
+Please amend the typical statements below to suit your circumstances if (B) is selected.
+
+% Replace the following guidance with your actual publications/contributions
+% only if option B applies; delete it if option A applies.
+\textit{[If option B applies: replace this note with the relevant chapter,
+full publication details and the actual contributions of each co-author.
+The publications in the official Word template are examples only.]}
+
+\CEEsignature{[Input Name Here \& Sign Above]}
+\end{CEEdeclaration}
+
+\CEEfrontchapter{Abstract}
+Replace this paragraph with your abstract: the research problem, objectives,
+methods, principal findings and contribution. Do not invent results.
+
+\CEEfrontchapter{Acknowledgement}
+Replace this paragraph with your acknowledgements.
+
+% OPTIONAL: delete any unused list, keeping the order of the remaining lists.
+\CEEfrontchapter{List of Abbreviations}
+\begin{tabular}{@{}ll@{}}
+  NTU & Nanyang Technological University\\
+  CEE & School of Civil \& Environmental Engineering
+\end{tabular}
+
+\CEEfrontchapter{List of Symbols}
+\begin{tabular}{@{}ll@{}}
+  $n$ & Number of observations
+\end{tabular}
+
+\CEElistoffigures
+\CEElistoftables
+% CEE explicitly places the table of contents AFTER the optional lists.
+\tableofcontents
+
+\CEEmainmatter
+% Replace these chapters with your existing chapter inputs as needed:
+% \input{chapter-1/chapter-1}
+\chapter{Introduction}
+\section{Background}
+Write your research context here.
+\section{Research Objectives}
+State the objectives and research questions.
+\section{Scope and Organisation}
+Define the scope and introduce the remaining chapters.
+
+\chapter{Literature Review}
+Synthesise relevant work and identify the research gap.
+% APA parenthetical citation: \parencite{yourKey}
+% APA narrative citation:     \textcite{yourKey}
+% With a page locator:        \parencite[p.~25]{yourKey}
+
+\chapter{Methodology}
+Describe the data, methods, assumptions and validation procedures.
+
+\chapter{Results and Discussion}
+Present your findings and explain their implications and limitations.
+
+\chapter{Conclusions and Recommendations}
+Answer the research questions and give evidence-based recommendations.
+
+% Show References and its contents entry even when the bibliography is empty.
+\chapter*{References}
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
+% Add verified sources to references.bib and cite them in the text.
+\printbibliography[heading=none]
+
+\appendix
+\chapter{Supporting Material}
+Place supplementary material here, or remove this appendix if unnecessary.
+\end{document}
+
+
